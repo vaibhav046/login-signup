@@ -1,25 +1,26 @@
-var Users = require('../models/Users');
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const userController = require('./user.controller.js');
+// eslint-disable-next-line new-cap
+const router = express.Router();
 
-router.get('/login/:id', async (req, res) => {
-    // console.log(req.params.id);
-    let loginId = req.params.id;
-    let user = await Users.findOne({ email: loginId });
-    res.send({ user: user });
+router.post('/login', async (req, res) => {
+    try {
+        const login = req.body;
+        const result = await (userController.login(login));
+        res.status(200).send(result);
+    } catch (e) {
+        res.status(e.status).send(e.message);
+    }
 });
 
 router.post('/signup', async (req, res) => {
-    let userData = req.body;
-    let users = new Users(userData);
-    users.save((err, result) => {
-        if (err) {
-            console.log('saving post is an error');
-            return res.status(500).send({ message: 'user is not saved' });
-        }
-        res.status(200).send({ message: 'user saved sucesfully' });
-    });
-
+    try {
+        const userData = req.body;
+        const result = await userController.signup(userData);
+        res.status(200).send(result);
+    } catch (e) {
+        res.status(e.status).send(e.message);
+    }
 });
 
 module.exports = router;
