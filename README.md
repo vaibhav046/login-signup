@@ -5,6 +5,10 @@ Node JS and Express 4
 
 -Simple login and signup support
 
+-Bcrypt for password hashing
+
+-Mongo schema to save data
+
 -File upload and static directory serve
 
 -Mocha ,Chai ,Nock based integration and unit test
