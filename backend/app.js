@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors('*'));
 app.use('/default', routes);
+app.use(express.static('uploads'));
 
 mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true }, (err) => {
     if (!err) {

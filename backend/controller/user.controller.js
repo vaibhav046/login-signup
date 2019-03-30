@@ -32,4 +32,11 @@ exports.signup = async (userData) => {
     }
 };
 
+exports.upload = (req, res) => {
+    if (req.files.length <= 0) {
+        res.status(404).send({ message: 'no file recieved' });
+    } else {
+        res.status(200).send({ message: 'file successfully recieved' });
+    }
+};
 
